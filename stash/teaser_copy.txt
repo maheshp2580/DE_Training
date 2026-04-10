@@ -1,0 +1,2 @@
+This is an amazing text file for the assignment.
+It contains exactly two lines of typed text to be read by Python.
