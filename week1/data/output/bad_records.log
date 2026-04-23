@@ -1,0 +1,2 @@
+2026-04-23 09:29:25,072 - ERROR - Row 2 failed validation: Missing Price | Data: {'Product ID': '102', 'Product_Name': ' Banana', 'Price': ' ', 'Category': ' Produce', 'In Stock': ' '}
+2026-04-23 09:29:25,072 - ERROR - Row 6 failed validation: Missing Price | Data: {'Product ID': '', 'Product_Name': ' Empty Item', 'Price': ' ', 'Category': ' ', 'In Stock': ' '}

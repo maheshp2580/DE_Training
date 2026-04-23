@@ -1,0 +1,51 @@
+[
+    {
+        "product_id": "101",
+        "product_name": "Apple Fuji",
+        "price": "1.99",
+        "category": "Produce",
+        "in_stock": "Yes"
+    },
+    {
+        "product_id": "102",
+        "product_name": "Banana",
+        "price": null,
+        "category": "Produce",
+        "in_stock": null
+    },
+    {
+        "product_id": "103",
+        "product_name": null,
+        "price": "4.99",
+        "category": "Dairy",
+        "in_stock": "No"
+    },
+    {
+        "product_id": "104",
+        "product_name": "Organic Milk",
+        "price": "5.49",
+        "category": null,
+        "in_stock": "Yes"
+    },
+    {
+        "product_id": "105",
+        "product_name": "Chicken Breast",
+        "price": "8.99",
+        "category": "Meat",
+        "in_stock": null
+    },
+    {
+        "product_id": null,
+        "product_name": "Empty Item",
+        "price": null,
+        "category": null,
+        "in_stock": null
+    },
+    {
+        "product_id": "106",
+        "product_name": "Whole Wheat Bread",
+        "price": "3.49",
+        "category": "Bakery",
+        "in_stock": "Yes"
+    }
+]

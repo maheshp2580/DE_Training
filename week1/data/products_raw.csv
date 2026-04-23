@@ -1,0 +1,8 @@
+ Product ID ,  Product_Name  ,  Price , Category , In Stock 
+101, Apple Fuji, 1.99, Produce, Yes
+102, Banana, , Produce, 
+103,  , 4.99, Dairy, No
+104, Organic Milk, 5.49, , Yes
+105, Chicken Breast, 8.99, Meat, 
+, Empty Item, , , 
+106, Whole Wheat Bread, 3.49, Bakery, Yes

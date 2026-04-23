@@ -1,0 +1,44 @@
+[
+    {
+        "product_id": "A001",
+        "name": "Green Apples",
+        "price": 1.5,
+        "category": "Produce",
+        "vendor": "Vendor A"
+    },
+    {
+        "product_id": "A002",
+        "name": "Almond Milk",
+        "price": 3.99,
+        "category": "Dairy",
+        "vendor": "Vendor A"
+    },
+    {
+        "product_id": "A003",
+        "name": "Eggs 1Dozen",
+        "price": 0.0,
+        "category": "Dairy",
+        "vendor": "Vendor A"
+    },
+    {
+        "product_id": "A004",
+        "name": "Ground Beef",
+        "price": 7.99,
+        "category": "Meat",
+        "vendor": "Vendor A"
+    },
+    {
+        "product_id": "B212",
+        "name": "Oat Milk",
+        "price": 4.99,
+        "category": "Dairy",
+        "vendor": "Vendor B"
+    },
+    {
+        "product_id": "B444",
+        "name": "White Bread",
+        "price": 2.99,
+        "category": "Bakery",
+        "vendor": "Vendor B"
+    }
+]
