@@ -31,12 +31,13 @@ def main():
     print("(Use JOIN + GROUP BY + aggregation functions)\n")
     
     query_report = """
-    -- TODO: Write a query that joins customers and orders, groups by the customer,
-    -- and calculates both the total number of orders and the total revenue (sum of amounts).
-    -- Make sure to include the customer's name in the results.
+    SELECT customers.name, COUNT(orders.order_id) AS total_orders, SUM(orders.amount) AS total_revenue
+    FROM customers
+    LEFT JOIN orders ON customers.id = orders.customer_id
+    GROUP BY customers.id, customers.name;
     """
     
-    # run_query(query_report)
+    run_query(query_report)
 
 if __name__ == "__main__":
     main()

@@ -26,35 +26,30 @@ def run_query(query):
 def main():
     print("=== Weekly Exercises ===")
     
-    # 1. Retrieve all customers
     query_1 = """
-    -- TODO: Write a query to retrieve all customers
+    SELECT * FROM customers;
     """
-    # run_query(query_1)
+    run_query(query_1)
     
-    # 2. Filter customers by city
     query_2 = """
-    -- TODO: Write a query to filter customers by a specific city (e.g., 'Hyderabad')
+    SELECT * FROM customers WHERE city = 'Hyderabad';
     """
-    # run_query(query_2)
+    run_query(query_2)
     
-    # 3. Join tables and display name + amount
     query_3 = """
-    -- TODO: Write a query to join tables and display customer name and order amount
+    SELECT customers.name, orders.amount FROM customers JOIN orders ON customers.id = orders.customer_id;
     """
-    # run_query(query_3)
+    run_query(query_3)
     
-    # 4. Calculate total orders per customer
     query_4 = """
-    -- TODO: Write a query to calculate the total number of orders per customer
+    SELECT customers.name, COUNT(orders.order_id) AS total_orders FROM customers LEFT JOIN orders ON customers.id = orders.customer_id GROUP BY customers.id, customers.name;
     """
-    # run_query(query_4)
+    run_query(query_4)
     
-    # 5. Find customers with missing values
     query_5 = """
-    -- TODO: Write a query to find customers with missing values (e.g., age is NULL)
+    SELECT * FROM customers WHERE age IS NULL;
     """
-    # run_query(query_5)
+    run_query(query_5)
 
 if __name__ == "__main__":
     main()
