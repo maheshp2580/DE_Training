@@ -1,0 +1,6 @@
+{"event_id": 1001, "user_id": "U01", "event_type": "page_view", "device": "mobile", "country": "India", "event_date": "2024-01-01", "session_time_sec": 45}
+{"event_id": 1002, "user_id": "U02", "event_type": "click", "device": "desktop", "country": "USA", "event_date": "2024-01-01", "session_time_sec": 120}
+{"event_id": 1003, "user_id": "U01", "event_type": "purchase", "device": "mobile", "country": "India", "event_date": "2024-01-02", "session_time_sec": 300}
+{"event_id": 1004, "user_id": "U03", "event_type": "page_view", "device": "tablet", "country": "UK", "event_date": "2024-01-02", "session_time_sec": 60}
+{"event_id": 1005, "user_id": "U02", "event_type": "click", "device": "desktop", "country": "USA", "event_date": "2024-01-03", "session_time_sec": 90}
+{"event_id": 1006, "user_id": null, "event_type": "page_view", "device": "mobile", "country": "India", "event_date": "2024-01-03", "session_time_sec": 30}
