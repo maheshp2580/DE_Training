@@ -31,7 +31,7 @@ def main():
     print("(Use JOIN + GROUP BY + aggregation functions)\n")
     
     query_report = """
-    SELECT customers.name, COUNT(orders.order_id) AS total_orders, SUM(orders.amount) AS total_revenue
+    SELECT customers.name, COUNT(orders.order_id) AS total_orders, COALESCE(SUM(orders.amount), 0) AS total_revenue
     FROM customers
     LEFT JOIN orders ON customers.id = orders.customer_id
     GROUP BY customers.id, customers.name;
