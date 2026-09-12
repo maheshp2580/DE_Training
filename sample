@@ -1,0 +1,62 @@
+(async () => {
+  const id = 292071;
+  const v = 'api-version=5.0';
+  const base = `/DHSS/_apis/wit/workitems/${id}`;
+  const f = 'Microsoft.VSTS.TCM.Steps';
+  let sundayRev = null; // leave null to auto-pick the last revision saved on Sunday 9/6; or set a number
+
+  // 1. Revision history (read-only)
+  const revs = (await (await fetch(`${base}/revisions?${v}`)).json()).value;
+  console.table(revs.map(r => ({
+    rev: r.rev,
+    date: new Date(r.fields['System.ChangedDate']).toLocaleString(),
+    by: r.fields['System.ChangedBy']?.displayName ?? r.fields['System.ChangedBy'],
+    title: r.fields['System.Title']
+  })));
+
+  if (sundayRev === null) {
+    const sun = revs.filter(r => new Date(r.fields['System.ChangedDate']).toDateString() === 'Sun Sep 06 2026');
+    if (!sun.length) { console.error('No revision found on Sun 9/6 - set sundayRev manually.'); return; }
+    sundayRev = sun[sun.length - 1].rev;
+  }
+  const orig = revs.find(r => r.rev === sundayRev);
+  const cur = await (await fetch(`${base}?${v}`)).json();
+
+  // 2. Preview (read-only)
+  const readSteps = xml => [...new DOMParser().parseFromString(xml || '<steps/>', 'text/xml')
+    .querySelectorAll('step')].map((s, i) => {
+      const [a, e] = [...s.querySelectorAll('parameterizedString')]
+        .map(p => new DOMParser().parseFromString(p.textContent, 'text/html').body.innerText.trim());
+      return { step: i + 1, action: a, expected: e };
+    });
+
+  console.log(`Restoring from rev ${sundayRev}; current rev is ${cur.rev}`);
+  console.log('TITLE sunday :', orig.fields['System.Title']);
+  console.log('TITLE current:', cur.fields['System.Title']);
+  console.log('STEPS sunday:');  console.table(readSteps(orig.fields[f]));
+  console.log('STEPS current:'); console.table(readSteps(cur.fields[f]));
+
+  const skip = ['System.Rev','System.ChangedDate','System.ChangedBy','System.AuthorizedDate',
+                'System.RevisedDate','System.Watermark','System.AuthorizedAs','System.PersonId'];
+  const diffs = Object.keys({ ...orig.fields, ...cur.fields })
+    .filter(k => !skip.includes(k) && JSON.stringify(orig.fields[k]) !== JSON.stringify(cur.fields[k]));
+  console.log('Fields that differ since Sunday:');
+  console.table(diffs.map(k => ({ field: k, sunday: String(orig.fields[k]).slice(0, 80), current: String(cur.fields[k]).slice(0, 80) })));
+
+  // 3. Confirm, then write
+  if (!confirm(`Restore Title and Steps from rev ${sundayRev}?\n\nFields differing: ${diffs.join(', ') || 'none'}\n\nCheck the console output first. OK = save, Cancel = do nothing.`)) {
+    console.log('Cancelled - nothing changed.');
+    return;
+  }
+
+  const res = await fetch(`${base}?${v}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json-patch+json' },
+    body: JSON.stringify([
+      { op: 'test', path: '/rev', value: cur.rev },
+      { op: 'add', path: '/fields/System.Title', value: orig.fields['System.Title'] },
+      { op: 'add', path: '/fields/' + f, value: orig.fields[f] || '' }
+    ])
+  });
+  console.log(res.status === 200 ? 'Restored. Refresh the page.' : 'Failed:', res.status, await res.json());
+})();
